@@ -7,10 +7,10 @@ countNucleotides word = foldr f counts word
                        f symbol cts = Map.insertWith (+) symbol 1 cts
 
 formattedCount :: Map.Map Char Int -> String
-formattedCount counts = concat . (intersperse " ") . map show $ (map gitCount ['A', 'C', 'G', 'T'])
+formattedCount counts = concat . intersperse " " $ map gitCount ['A', 'C', 'G', 'T']
                where gitCount ch = case Map.lookup ch counts of
-                                   Nothing -> 0
-                                   Just n -> n
+                                   Nothing -> "0"
+                                   Just n -> show n
 
 count :: String->String
 count = formattedCount . countNucleotides
